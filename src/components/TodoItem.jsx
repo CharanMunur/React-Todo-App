@@ -48,24 +48,54 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
 
   // ==================== Render ====================
   return (
-    <Item variant="outline">
+    <Item
+      variant="outline"
+      className="
+        transition-colors
+        hover:bg-muted/50
+        group
+        "
+    >
       <div className="flex items-center gap-4 w-full">
         {/* Checkbox for toggling completion */}
         <Checkbox
           checked={todo.completed}
           onCheckedChange={() => onToggle(todo.id)}
+          className="transition-colors hover:ring-1 "
         />
 
-        {/* Display title and description */}
+        {/* Display title and description with strikethrough if completed */}
         <ItemContent className="flex-1">
-          <ItemTitle>{todo.title}</ItemTitle>
-          <ItemDescription>{todo.description}</ItemDescription>
+          <ItemTitle
+            className={
+              "transition-all" +
+              (todo.completed
+                ? " line-through text-muted-foreground/70"
+                : "")
+            }
+          >
+            {todo.title}
+          </ItemTitle>
+          <ItemDescription
+            className={
+              "transition-all" +
+              (todo.completed
+                ? " line-through text-muted-foreground/70"
+                : "")
+            }
+          >
+            {todo.description}
+          </ItemDescription>
         </ItemContent>
 
         {/* Dropdown menu for actions */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="ml-auto">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="ml-auto transition-colors hover:bg-accent/70 focus-visible:ring-2"
+            >
               <MoreVertical className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
@@ -73,7 +103,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
             {/* Edit Option */}
             <DropdownMenuItem
               onSelect={openEdit}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:bg-primary/10 focus:bg-primary/10"
             >
               <Pencil className="w-4 h-4 mr-2" />
               Edit
@@ -83,7 +113,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
               onSelect={() => {
                 if (onDelete) onDelete(todo.id);
               }}
-              className="flex items-center gap-2 text-red-600 focus:text-red-700"
+              className="flex items-center gap-2 text-red-600 focus:text-red-700 hover:bg-red-50"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete
