@@ -69,9 +69,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
           <ItemTitle
             className={
               "transition-all" +
-              (todo.completed
-                ? " line-through text-muted-foreground/70"
-                : "")
+              (todo.completed ? " line-through text-muted-foreground/70" : "")
             }
           >
             {todo.title}
@@ -79,9 +77,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
           <ItemDescription
             className={
               "transition-all" +
-              (todo.completed
-                ? " line-through text-muted-foreground/70"
-                : "")
+              (todo.completed ? " line-through text-muted-foreground/70" : "")
             }
           >
             {todo.description}
@@ -110,10 +106,8 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggle }) => {
             </DropdownMenuItem>
             {/* Delete Option */}
             <DropdownMenuItem
-              onSelect={() => {
-                if (onDelete) onDelete(todo.id);
-              }}
-              className="flex items-center gap-2 text-red-600 focus:text-red-700 hover:bg-red-50"
+              onSelect={() => onDelete(todo.id)}
+              className="text-destructive focus:text-destructive focus:bg-destructive/10"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete
