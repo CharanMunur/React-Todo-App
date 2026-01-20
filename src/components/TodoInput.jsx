@@ -37,8 +37,10 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
 
   return (
     <div className="flex w-full space-x-2">
+      {/* --- Add Task Dialog --- */}
       <div className="flex-3 w-3/4">
         <Dialog open={open} onOpenChange={setOpen}>
+          {/* Dialog Trigger Button */}
           <DialogTrigger asChild>
             <Button
               variant="outline"
@@ -47,8 +49,11 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
               Add Task <Plus className="w-4 h-4 ml-2" />
             </Button>
           </DialogTrigger>
+
+          {/* Dialog Content */}
           <DialogContent className="sm:max-w-[425px]">
             <form onSubmit={handleSubmit} className="contents">
+              {/* Dialog Header and Description */}
               <DialogHeader>
                 <DialogTitle>Add a New Todo</DialogTitle>
                 <DialogDescription>
@@ -56,6 +61,8 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
                   save.
                 </DialogDescription>
               </DialogHeader>
+
+              {/* Title and Description Inputs */}
               <div className="grid gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="todo-title">Title</Label>
@@ -78,6 +85,8 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
                   />
                 </div>
               </div>
+
+              {/* Dialog Actions */}
               <DialogFooter>
                 <DialogClose asChild>
                   <Button variant="outline" type="button">
@@ -90,9 +99,11 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
           </DialogContent>
         </Dialog>
       </div>
-      {/* Filter Dropdown */}
+
+      {/* --- Filter Dropdown --- */}
       <div className="flex-1 w-1/4">
         <DropdownMenu>
+          {/* Dropdown Trigger Button */}
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
@@ -101,6 +112,8 @@ const TodoInput = ({ addTodo, onFilterChange, filter }) => {
               {filter} <ChevronDown className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
+
+          {/* Dropdown Options */}
           <DropdownMenuContent className="min-w-[142px] py-1" align="end">
             <DropdownMenuGroup>
               <DropdownMenuItem
