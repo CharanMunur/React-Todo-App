@@ -101,20 +101,6 @@ Open [http://localhost:5173](http://localhost:5173) (or as instructed) in your b
 
 ---
 
-## 🧩 Possible Extensions
-
-These are ideas for future enhancements, **not yet implemented:**
-
-- Undo delete (via toast/notification)
-- Keyboard shortcuts (navigate, add, delete, edit)
-- Sorting by creation date or custom fields
-- Backend integration (e.g., REST API)
-- Drag-and-drop reordering
-- Better accessibility / screen reader support
-- Tests (unit/integration)
-
----
-
 ## 🙌 Contributing
 
 Pull requests and suggestions are welcome! Feel free to fork and submit a PR.
