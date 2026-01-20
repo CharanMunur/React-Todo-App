@@ -22,7 +22,7 @@ import {
   DropdownMenuGroup,
 } from "./ui/dropdown-menu";
 
-const TodoInput = ({ addTodo, onFilterChange }) => {
+const TodoInput = ({ addTodo, onFilterChange, filter }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
@@ -98,26 +98,26 @@ const TodoInput = ({ addTodo, onFilterChange }) => {
               variant="outline"
               className="w-full flex items-center gap-2 focus-visible:ring-2 transition-colors"
             >
-              Filters <ChevronDown className="w-4 h-4" />
+              {filter} <ChevronDown className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="min-w-[142px] py-1" align="end">
             <DropdownMenuGroup>
               <DropdownMenuItem
                 className="flex items-center px-3 py-2 rounded-md focus:bg-accent/20 transition-colors"
-                onSelect={() => onFilterChange("all")}
+                onSelect={() => onFilterChange("All")}
               >
                 All
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center px-3 py-2 rounded-md focus:bg-accent/20 transition-colors"
-                onSelect={() => onFilterChange("completed")}
+                onSelect={() => onFilterChange("Completed")}
               >
                 Completed
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center px-3 py-2 rounded-md focus:bg-accent/20 transition-colors"
-                onSelect={() => onFilterChange("pending")}
+                onSelect={() => onFilterChange("Pending")}
               >
                 Pending
               </DropdownMenuItem>

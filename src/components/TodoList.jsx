@@ -9,17 +9,17 @@ const TodoList = ({ todos, addTodo, editTodo, toggleTodo, deleteTodo }) => {
   const total = todos.length;
   const completed = todos.filter((todo) => todo.completed).length;
   const pending = total - completed;
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("All");
   const visibleTodos =
-    filter === "completed"
+    filter === "Completed"
       ? todos.filter((todo) => todo.completed)
-      : filter === "pending"
+      : filter === "Pending"
       ? todos.filter((todo) => !todo.completed)
       : todos;
 
   return (
     <div className="flex flex-col gap-2 m-20 w-full max-w-xl mx-auto">
-      <TodoInput addTodo={addTodo} onFilterChange={setFilter}/>
+      <TodoInput addTodo={addTodo} onFilterChange={setFilter} filter={filter} />
       {todos.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-muted p-8 bg-muted/20 my-10">
           <div className="text-lg font-semibold mb-2 text-muted-foreground">
@@ -40,6 +40,7 @@ const TodoList = ({ todos, addTodo, editTodo, toggleTodo, deleteTodo }) => {
           />
         ))
       )}
+      
       {todos.length > 0 && (
         <div>
           <Separator className="my-4" />
