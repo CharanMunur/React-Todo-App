@@ -103,9 +103,6 @@ Open http://localhost:5173 (or as instructed) in your browser to view the app.
 
 ---
 
-<<<<<<< HEAD
-## 🙌 Contributing
-=======
 ## Possible Extensions
 
 - Undo delete (via toast/notification)
@@ -118,18 +115,6 @@ Open http://localhost:5173 (or as instructed) in your browser to view the app.
 
 ---
 
-## Contributing
->>>>>>> f4a2dfd ( - introduce sidebar controls and detail panel)
-
-Pull requests and suggestions are welcome! Feel free to fork and submit a PR.
-
----
-
 ## License
 
 [MIT](LICENSE)
-<<<<<<< HEAD
-
----
-=======
->>>>>>> f4a2dfd ( - introduce sidebar controls and detail panel)
