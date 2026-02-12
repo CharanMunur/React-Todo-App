@@ -6,6 +6,7 @@ import { Badge } from "./ui/badge";
 import ModeToggle from "../providers/features/theme/mode-toggle";
 import TodoInputDialog from "./TodoInputDialog";
 import { Plus, Search, Star, Trash, LayoutList } from "lucide-react";
+import { ImGithub } from "react-icons/im";
 import {
   Select,
   SelectContent,
@@ -35,7 +36,17 @@ const Sidebar = ({
     <>
       <aside className="w-[380px] border-r bg-background p-4 flex flex-col gap-5 h-screen overflow-y-auto">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">SuperTodo</h1>
+          <h1 className="text-2xl font-bold flex gap-3 items-center">
+            SuperTodo
+            <a
+              href="https://github.com/CharanMunur/React-Todo-App"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <ImGithub />
+            </a>
+          </h1>
           <ModeToggle />
         </div>
 
