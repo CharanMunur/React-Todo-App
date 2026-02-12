@@ -33,7 +33,7 @@ const Sidebar = ({
 
   return (
     <>
-      <aside className="w-80 border-r bg-background p-4 flex flex-col gap-5 h-screen overflow-y-auto">
+      <aside className="w-[380px] border-r bg-background p-4 flex flex-col gap-5 h-screen overflow-y-auto">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">SuperTodo</h1>
           <ModeToggle />

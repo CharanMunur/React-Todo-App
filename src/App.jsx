@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import TodoList from "./components/TodoList";
 import TodoDetail from "./components/TodoDetail";
 import useTodos from "./hooks/useTodos";
+import { ScrollArea } from "./components/ui/scroll-area";
 
 const App = () => {
   const todoApi = useTodos();
@@ -51,29 +52,39 @@ const App = () => {
         setSort={setSort}
       />
       <div className="flex flex-1 h-screen">
-        <main className="flex-1 overflow-y-auto p-6">
-          <TodoList
-            todos={sortedTodos}
-            editTodo={todoApi.editTodo}
-            toggleTodo={todoApi.toggleTodo}
-            deleteTodo={todoApi.deleteTodo}
-            onSelectTodo={setSelectedTodoId}
-            selectedTodoId={selectedTodoId}
-          />
-        </main>
-        <AnimatePresence mode="wait">
-          {selectedTodo && (
-            <TodoDetail
-              key={selectedTodoId}
-              todo={selectedTodo}
-              onEdit={todoApi.editTodo}
-              addSubtask={todoApi.addSubtask}
-              toggleSubtask={todoApi.toggleSubtask}
-              deleteSubtask={todoApi.deleteSubtask}
-              onClose={() => setSelectedTodoId(null)}
+        <main className="flex-1 p-6 flex flex-col gap-4 min-h-0">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold">Tasks</h2>
+            <span className="text-sm text-muted-foreground">
+              {sortedTodos.length} shown
+            </span>
+          </div>
+          <ScrollArea className="flex-1 min-h-0 pr-3">
+            <TodoList
+              todos={sortedTodos}
+              editTodo={todoApi.editTodo}
+              toggleTodo={todoApi.toggleTodo}
+              deleteTodo={todoApi.deleteTodo}
+              onSelectTodo={setSelectedTodoId}
+              selectedTodoId={selectedTodoId}
             />
-          )}
-        </AnimatePresence>
+          </ScrollArea>
+        </main>
+        <ScrollArea className="flex min-h-screen">
+          <AnimatePresence mode="wait">
+            {selectedTodo && (
+              <TodoDetail
+                key={selectedTodoId}
+                todo={selectedTodo}
+                onEdit={todoApi.editTodo}
+                addSubtask={todoApi.addSubtask}
+                toggleSubtask={todoApi.toggleSubtask}
+                deleteSubtask={todoApi.deleteSubtask}
+                onClose={() => setSelectedTodoId(null)}
+              />
+            )}
+          </AnimatePresence>
+        </ScrollArea>
       </div>
     </div>
   );
