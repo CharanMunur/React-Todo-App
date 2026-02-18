@@ -99,26 +99,28 @@ const Sidebar = ({
 
         <Separator />
 
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold">Actions</h2>
-          <Select onValueChange={setSort} value={sort}>
-            <SelectTrigger>
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="default">Default</SelectItem>
-              <SelectItem value="priority">Priority</SelectItem>
-              <SelectItem value="createdAt">Creation Date</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button
-            variant="outline"
-            className="justify-start gap-2"
-            onClick={clearCompleted}
-            disabled={completed === 0}
-          >
-            Clear Completed
-          </Button>
+        <div className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold mb-1">Actions</h2>
+          <div className="flex gap-2">
+            <Select onValueChange={setSort} value={sort}>
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default</SelectItem>
+                <SelectItem value="priority">Priority</SelectItem>
+                <SelectItem value="createdAt">Creation Date</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button
+              variant="outline"
+              className="gap-2 whitespace-nowrap"
+              onClick={clearCompleted}
+              disabled={completed === 0}
+            >
+              Clear Completed
+            </Button>
+          </div>
         </div>
 
         <Separator />

@@ -7,6 +7,7 @@ import { Progress } from "./ui/progress";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
+import { ScrollArea } from "./ui/scroll-area";
 import { Calendar, Trash2, X } from "lucide-react";
 
 const priorityVariant = {
@@ -47,9 +48,9 @@ const TodoDetail = ({
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 16, opacity: 0 }}
       transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-      className="w-[400px] border-l min-h-screen bg-background p-6 flex flex-col"
+      className="w-[400px] border-l h-screen bg-background p-6 flex flex-col"
     >
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="flex-1 min-h-0 flex flex-col">
         <div className="flex max-h-screen justify-between items-start mb-4">
           <h2 className="text-2xl font-bold">{todo.title}</h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -71,43 +72,47 @@ const TodoDetail = ({
 
         <p className="text-muted-foreground mb-6">{todo.description}</p>
 
-        <Separator className="my-4" />
+        <Separator className="mb-4" />
 
         {/* Subtasks */}
-        <div className="mb-6">
+        <div className="flex-1 min-h-0 flex flex-col">
           <h3 className="font-semibold mb-2">Subtasks</h3>
           {todo.subtasks.length > 0 && (
             <div className="mb-2">
               <Progress value={subtaskProgress} className="h-2" />
             </div>
           )}
-          <div className="flex flex-col gap-2">
-            {todo.subtasks.map((subtask) => (
-              <div key={subtask.id} className="flex items-center gap-2 group">
-                <Checkbox
-                  id={`subtask-${subtask.id}`}
-                  checked={subtask.completed}
-                  onCheckedChange={() => toggleSubtask(todo.id, subtask.id)}
-                />
-                <label
-                  htmlFor={`subtask-${subtask.id}`}
-                  className={`flex-1 text-sm ${
-                    subtask.completed ? "line-through text-muted-foreground" : ""
-                  }`}
-                >
-                  {subtask.text}
-                </label>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-7 w-7 opacity-0 group-hover:opacity-100"
-                  onClick={() => deleteSubtask(todo.id, subtask.id)}
-                >
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
+          <ScrollArea className="flex-1 min-h-0">
+            <div className="pr-2">
+              <div className="flex flex-col gap-2">
+                {todo.subtasks.map((subtask) => (
+                  <div key={subtask.id} className="flex items-center gap-2 group">
+                    <Checkbox
+                      id={`subtask-${subtask.id}`}
+                      checked={subtask.completed}
+                      onCheckedChange={() => toggleSubtask(todo.id, subtask.id)}
+                    />
+                    <label
+                      htmlFor={`subtask-${subtask.id}`}
+                      className={`flex-1 text-sm ${
+                        subtask.completed ? "line-through text-muted-foreground" : ""
+                      }`}
+                    >
+                      {subtask.text}
+                    </label>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-7 w-7 opacity-0 group-hover:opacity-100"
+                      onClick={() => deleteSubtask(todo.id, subtask.id)}
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          </ScrollArea>
           <form onSubmit={handleAddSubtask} className="flex gap-2 mt-2">
             <Input
               placeholder="Add new subtask..."

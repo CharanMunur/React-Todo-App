@@ -52,25 +52,26 @@ const App = () => {
         setSort={setSort}
       />
       <div className="flex flex-1 h-screen">
-        <main className="flex-1 p-6 flex flex-col gap-4 min-h-0">
+        <main className="flex-1 p-5 flex flex-col gap-4 min-h-0">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold">Tasks</h2>
             <span className="text-sm text-muted-foreground">
               {sortedTodos.length} shown
             </span>
           </div>
-          <ScrollArea className="flex-1 min-h-0 pr-3">
-            <TodoList
-              todos={sortedTodos}
-              editTodo={todoApi.editTodo}
-              toggleTodo={todoApi.toggleTodo}
-              deleteTodo={todoApi.deleteTodo}
-              onSelectTodo={setSelectedTodoId}
-              selectedTodoId={selectedTodoId}
-            />
+          <ScrollArea className="flex-1 min-h-0">
+            <div className="pr-3">
+              <TodoList
+                todos={sortedTodos}
+                editTodo={todoApi.editTodo}
+                toggleTodo={todoApi.toggleTodo}
+                deleteTodo={todoApi.deleteTodo}
+                onSelectTodo={setSelectedTodoId}
+                selectedTodoId={selectedTodoId}
+              />
+            </div>
           </ScrollArea>
         </main>
-        <ScrollArea className="flex min-h-screen">
           <AnimatePresence mode="wait">
             {selectedTodo && (
               <TodoDetail
@@ -84,7 +85,6 @@ const App = () => {
               />
             )}
           </AnimatePresence>
-        </ScrollArea>
       </div>
     </div>
   );
