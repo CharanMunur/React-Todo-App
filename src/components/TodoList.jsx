@@ -64,7 +64,7 @@ const TodoList = ({
   );
 
   const renderGroupedView = () => {
-    const groupOrder = ["overdue", "today", "thisWeek", "later", "noDate"];
+    const groupOrder = ["today", "overdue", "thisWeek", "later", "noDate"];
 
     return (
       <div className="flex flex-col gap-6">
