@@ -1,10 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { AnimatePresence } from "framer-motion";
 import Sidebar from "./components/Sidebar";
 import TodoList from "./components/TodoList";
 import TodoDetail from "./components/TodoDetail";
 import useTodos from "./hooks/useTodos";
 import { ScrollArea } from "./components/ui/scroll-area";
+
+const isSameDay = (date1, date2) => {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+};
+
+const isThisWeek = (date, today) => {
+  const startOfWeek = new Date(today);
+  const day = today.getDay();
+  const diff = today.getDate() - day + (day === 0 ? -6 : 1);
+  startOfWeek.setDate(diff);
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(endOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
+
+  return date >= startOfWeek && date <= endOfWeek;
+};
+
+const getDateGroup = (todo, today) => {
+  if (!todo.dueDate) return "noDate";
+
+  const dueDate = new Date(todo.dueDate);
+  dueDate.setHours(0, 0, 0, 0);
+
+  const todayDate = new Date(today);
+  todayDate.setHours(0, 0, 0, 0);
+
+  if (dueDate < todayDate) return "overdue";
+  if (isSameDay(dueDate, todayDate)) return "today";
+  if (isThisWeek(dueDate, todayDate)) return "thisWeek";
+  return "later";
+};
 
 const App = () => {
   const todoApi = useTodos();
@@ -13,6 +50,7 @@ const App = () => {
   const [filter, setFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [sort, setSort] = useState("default");
+  const [viewMode, setViewMode] = useState("list");
   const [selectedTodoId, setSelectedTodoId] = useState(null);
 
   const filteredTodos = todos
@@ -34,9 +72,26 @@ const App = () => {
     if (sort === "createdAt") {
       return b.createdAt - a.createdAt;
     }
-    // default sort
     return Number(a.completed) - Number(b.completed);
   });
+
+  const groupedTodos = useMemo(() => {
+    const today = new Date();
+    const groups = {
+      overdue: [],
+      today: [],
+      thisWeek: [],
+      later: [],
+      noDate: [],
+    };
+
+    sortedTodos.forEach((todo) => {
+      const group = getDateGroup(todo, today);
+      groups[group].push(todo);
+    });
+
+    return groups;
+  }, [sortedTodos]);
 
   const selectedTodo = todos.find(todo => todo.id === selectedTodoId);
 
@@ -50,6 +105,8 @@ const App = () => {
         setSearchTerm={setSearchTerm}
         sort={sort}
         setSort={setSort}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
       />
       <div className="flex flex-1 h-screen">
         <main className="flex-1 p-5 flex flex-col gap-4 min-h-0">
@@ -63,6 +120,8 @@ const App = () => {
             <div className="pr-3">
               <TodoList
                 todos={sortedTodos}
+                groupedTodos={groupedTodos}
+                viewMode={viewMode}
                 editTodo={todoApi.editTodo}
                 toggleTodo={todoApi.toggleTodo}
                 deleteTodo={todoApi.deleteTodo}

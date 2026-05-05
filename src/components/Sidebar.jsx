@@ -5,7 +5,7 @@ import { Separator } from "./ui/separator";
 import { Badge } from "./ui/badge";
 import ModeToggle from "../providers/features/theme/mode-toggle";
 import TodoInputDialog from "./TodoInputDialog";
-import { Plus, Search, Star, Trash, LayoutList } from "lucide-react";
+import { Plus, Search, Star, Trash, LayoutList, Calendar } from "lucide-react";
 import { ImGithub } from "react-icons/im";
 import {
   Select,
@@ -25,6 +25,8 @@ const Sidebar = ({
   setSearchTerm,
   sort,
   setSort,
+  viewMode,
+  setViewMode,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -68,6 +70,30 @@ const Sidebar = ({
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+
+        <nav className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold">View Mode</h2>
+          <div className="flex gap-2">
+            <Button
+              variant={viewMode === "list" ? "secondary" : "ghost"}
+              className="flex-1 justify-center gap-2"
+              onClick={() => setViewMode("list")}
+            >
+              <LayoutList className="w-4 h-4" />
+              List
+            </Button>
+            <Button
+              variant={viewMode === "dateGroup" ? "secondary" : "ghost"}
+              className="flex-1 justify-center gap-2"
+              onClick={() => setViewMode("dateGroup")}
+            >
+              <Calendar className="w-4 h-4" />
+              Date Group
+            </Button>
+          </div>
+        </nav>
+
+        <Separator />
 
         <nav className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold">Filters</h2>
