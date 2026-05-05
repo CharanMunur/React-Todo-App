@@ -15,6 +15,7 @@ This project demonstrates best practices for building a scalable, maintainable f
 - Task detail panel for subtask management
 - Mark todos as completed with visual feedback
 - Filter todos (All / Pending / Completed)
+- Group tasks by date (Overdue, Today, This Week, Later, No Date)
 - Sort by default status, priority, or creation date
 - Smooth list animations with Framer Motion
 - Edit todos via dialog
@@ -58,6 +59,7 @@ src/
 │   ├── Sidebar.jsx              # App controls and stats
 │   ├── TodoDetail.jsx           # Detail panel (subtasks)
 │   ├── TodoInputDialog.jsx      # Add todo dialog (priority, due date, subtasks)
+│   ├── TodoInput.jsx            # Inline add todo component and filter dropdown
 │   ├── TodoItem.jsx             # Single todo item (edit / delete / toggle)
 │   ├── TodoList.jsx             # Rendering only (no filtering)
 │   └── ui/                      # shadcn/ui components only
