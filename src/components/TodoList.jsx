@@ -5,27 +5,27 @@ import { AlertTriangle, Calendar, Clock, CalendarDays, Minus } from "lucide-reac
 
 const groupConfig = {
   overdue: {
-    title: "已逾期",
+    title: "Overdue",
     icon: AlertTriangle,
     className: "text-destructive",
   },
   today: {
-    title: "今天",
+    title: "Today",
     icon: Clock,
     className: "text-primary",
   },
   thisWeek: {
-    title: "本周",
+    title: "This Week",
     icon: CalendarDays,
     className: "text-blue-500",
   },
   later: {
-    title: "以后",
+    title: "Later",
     icon: Calendar,
     className: "text-muted-foreground",
   },
   noDate: {
-    title: "无截止日期",
+    title: "No Date",
     icon: Minus,
     className: "text-gray-400",
   },
